@@ -42,6 +42,6 @@ public class FreqPalavrasTest {
         FreqPalavras freq = new FreqPalavras(arvore);
         
         assertEquals("10 1", freq.getPalavras().get(0));
-        assertEquals("100 2", freq.getPalavras().get(10));        
+        assertEquals("100 2", freq.getPalavras().get(11));        
     }
 }
