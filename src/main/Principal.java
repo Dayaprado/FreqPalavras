@@ -12,9 +12,11 @@ import java.util.List;
  * @author dayana
  */
 public class Principal {
+    
+    //carrega o arquivo, adiciona as palavras na arvore e imprime
 
     public static void main(String[] args) {
-        String arquivo = "./src/arquivos/texto.txt";
+        String arquivo = "./src/arquivos/palavras.txt";
         List<String> palavras = carregarPalavras(arquivo);
 
         ArvoreBinaria arvore = new ArvoreBinaria(new No(palavras.get(0)));
@@ -23,7 +25,7 @@ public class Principal {
         }
 
         FreqPalavras freq = new FreqPalavras(arvore);
-        System.out.println(Arrays.toString(freq.getPalavras().toArray()));
+        freq.imprimir();
     }
 
     private static List<String> carregarPalavras(String arquivo) {

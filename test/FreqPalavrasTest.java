@@ -1,47 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-import java.util.Arrays;
+import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import main.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author crisdut
+ * @author dayprado
  */
 public class FreqPalavrasTest {
     
-    public FreqPalavrasTest() {
+    @Before
+    public void setUp() {
     }
     
     @Test
-    public void permiteOrdernarPalavras() {
-        ArvoreBinaria arvore = new ArvoreBinaria(new No("50"));
-       
-        arvore.novoNo("80");
-        arvore.novoNo("60");
-        arvore.novoNo("90");
-        arvore.novoNo("89");
-        arvore.novoNo("100");         
+    public void todaArvoreDevePossuirUmaRaiz() {
+        No no = new No("Teste");
+        ArvoreBinaria arvore = new ArvoreBinaria(no);
         
-        arvore.novoNo("30");
-        arvore.novoNo("20");
-        arvore.novoNo("10");
-        arvore.novoNo("21");        
-        arvore.novoNo("40");
-        arvore.novoNo("39");
-        arvore.novoNo("45");
-        arvore.novoNo("100");        
+        assertNotNull(arvore.getRaiz());
+    }
+    
+    @Test
+    public void permitirAdicionarNovoNoNaArvore() {
+        ArvoreBinaria arvore = new ArvoreBinaria(new No("Teste"));
         
+        arvore.novoNo("B");
+        arvore.novoNo(new No("B"));      
         
-        FreqPalavras freq = new FreqPalavras(arvore);
+        assertNotNull(arvore.getRaiz());
+        assertNotNull(arvore.getRaiz().possuiSubNos());
+    }
+    
+    @Test
+    public void permitirContarFreqDoValorNaArvore() {
+        ArvoreBinaria arvore = new ArvoreBinaria(new No("B"));
         
-        assertEquals("10 1", freq.getPalavras().get(0));
-        assertEquals("100 2", freq.getPalavras().get(11));        
+        arvore.novoNo("A");
+        arvore.novoNo(new No("A"));        
+        
+        assertNotNull(arvore.getRaiz());
+        assertNotNull(arvore.getRaiz().esquerda);
+        assertEquals(2, arvore.getRaiz().esquerda.getFreq());        
+    }
+    
+    @Test
+    public void permitirAdicionarNoDescendenteNaArvore() {
+        ArvoreBinaria arvore = new ArvoreBinaria(new No("B"));
+        
+        arvore.novoNo("A");
+        arvore.novoNo(new No("C"));
+        arvore.novoNo(new No("D"));        
+        
+        assertNotNull(arvore.getRaiz());
+        assertEquals("B", arvore.getRaiz().valor);
+        assertEquals("A", arvore.getRaiz().esquerda.valor);
+        assertEquals("C", arvore.getRaiz().direita.valor);        
+        assertEquals("D", arvore.getRaiz().direita.direita.valor);        
+    }
+    
+    @Test
+    public void permitirPesquisarNoNaArvore() {
+        ArvoreBinaria arvore = new ArvoreBinaria(new No("B"));
+        
+        arvore.novoNo("A");
+        arvore.novoNo(new No("C"));
+        arvore.novoNo(new No("D"));        
+        
+        No encontrado = arvore.getNo("D");
+        No naoEncontrado = arvore.getNo("F");        
+        
+        assertNotNull(encontrado);
+        assertEquals(null, naoEncontrado);        
+        assertEquals("D", encontrado.valor);
     }
 }

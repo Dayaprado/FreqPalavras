@@ -46,11 +46,14 @@ public class No {
     
     public int comparar(String valor){
         // Numeric Fix
+        // Adicionei essa verificaçao para caso a string seja numerica, 
+        // ela fazer o compareTo do valor numerico, não do caracter.
         if(isNumeric(this.valor) && isNumeric(valor)){
             Integer a = Integer.parseInt(this.valor);
             Integer b = Integer.parseInt(valor);            
             return a.compareTo(b);
         }
+        
         
         return this.valor.compareToIgnoreCase(valor);
     }
